@@ -6,7 +6,8 @@ Create Procedure prAtualizarTelefonesPorId
 	@IdTipoTelefone	tinyint			= NULL,
 	@IdCliente		int				= NULL,
 	@Ddd			nchar(2)		= NULL,
-	@Numero			nvarchar(9)		= NULL
+	@Numero			nvarchar(9)		= NULL,
+	@Ativo			bit				= NULL
 As
 Begin
 	Update Telefones
@@ -14,6 +15,8 @@ Begin
 			IdCliente = ISNULL(@IdCliente, IdCliente),
 			Ddd = ISNULL(@Ddd, Ddd),
 			Numero = ISNULL(@Numero, Numero),
-			Ativo = 'true'
+			Ativo = ISNULL(@Ativo, 'true')
 				Where Id = @Id
+
+	Select @Id
 End

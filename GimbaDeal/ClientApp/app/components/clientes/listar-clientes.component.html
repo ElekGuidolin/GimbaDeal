@@ -1,0 +1,23 @@
+﻿<h1>Clientes</h1>
+
+<p *ngIf="!clientes"><em>Loading...</em></p>
+
+<table class='table' *ngIf="clientes">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clientes">
+            <td class="col-md-6">{{ cliente.nome }}</td>
+            <td class="col-md-3">{{ cliente.cnpj }}</td>
+            <td class="col-md-3">
+                <button (click)="alterarCliente(cliente.id)" class="btn btn-warning">Alterar</button>
+                <button (click)="excluirCliente(cliente.id)" class="btn btn-danger">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

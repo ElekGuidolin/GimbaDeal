@@ -1,0 +1,25 @@
+﻿.form-inline .form-group {
+    margin-bottom: 10px;
+}
+
+.form-inline .form-group label {
+    justify-content: flex-start;
+    vertical-align: middle;
+}
+
+.panel-body .row h5{
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+.panel-body .form-group button {
+    margin-top: 25px;
+}
+
+.panel-footer .row{
+    padding-left: 15px;
+}
+
+.panel-footer .row button{
+    padding-left: 15px;
+}

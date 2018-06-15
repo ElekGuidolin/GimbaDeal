@@ -6,7 +6,8 @@ Create Procedure prRetornarCliente
 As
 Begin
 	Select	Nome,
-			Cnpj
+			Cnpj,
+			Ativo
 	From Clientes
 	Where	Id = @Id
 	And		Ativo = 'true'

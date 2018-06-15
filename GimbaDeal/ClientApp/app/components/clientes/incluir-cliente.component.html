@@ -1,0 +1,142 @@
+﻿<h1>Incluir Clientes</h1>
+<p>Todos os campos são obrigatórios</p>
+<form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h4>Cliente</h4>
+        </div>
+        <div [formGroup]="cliente" class="panel-body">
+            <div class="row">
+                <input name="id" id="id" type="hidden" />
+                <div class="form-group col-md-6">
+                    <label>Nome</label>
+                    <input formControlName="nome" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>CNPJ</label>
+                    <input formControlName="cnpj" maxlength="14" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Endereço</h4>
+        </div>
+        <div class="panel-body">
+            <div [formGroup]="endereco" class="row">
+                <div class="form-group col-md-4">
+                    <label>Cep</label>
+                    <input  formControlName="cep" maxlength="8" class="form-control" (blur)="pesquisarCep()" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Localidade</label>
+                    <input formControlName="localidade" readonly="readonly" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>UF</label>
+                    <input formControlName="uf" readonly="readonly" class="form-control" />
+                </div>
+            </div>
+            <div [formGroup]="endereco" class="row">
+                <div class="form-group col-md-4">
+                    <label>Logradouro</label>
+                    <input formControlName="logradouro" readonly="readonly" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input formControlName="bairro" readonly="readonly" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Complemento de CEP</label>
+                    <input formControlName="complemento" readonly="readonly" class="form-control" />
+                </div>
+            </div>
+            <div [formGroup]="complementoEndereco" class="row">
+                <div class="form-group col-md-3">
+                    <label>Número</label>
+                    <input name="numero" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Complemento</label>
+                    <input name="complemento" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Sócios</h4>
+        </div>
+        <div formArrayName="socios" class="panel-body">
+            <div *ngFor="let socio of socios.controls; let i = index;" [formGroupName]="i" class="row">
+                <h5>Sócio {{i + 1}}</h5>
+                <div class="form-group col-md-5">
+                    <label>Nome Sócio</label>
+                    <input formControlName="nome" class="form-control" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Cpf</label>
+                    <input formControlName="cpf" maxlength="11" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="btn btn-warning form-control" (click)="excluirSocio(i)">Excluir</button>
+                </div>
+                <br />
+            </div>
+            <button type="button" (click)="incluirSocio()" class="btn btn-default">Adicionar Sócio</button>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Telefones</h4>
+        </div>
+        <div formArrayName="telefones" class="panel-body">
+            <div *ngFor="let telefone of telefones.controls; let i = index;" class="row">
+                <h5>Telefone {{i + 1}}</h5>
+                <div class="form-group col-md-3">
+                    <label for="tipoTelefone">Tipo Telefone</label>
+                    <select formControlName="idTipoTelefone" class="form-control">
+                        <option *ngFor="let tipo of tiposTelefone" [value]="tipo.id">{{tipo.nome}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>DDD</label>
+                    <input formControlName="ddd" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Número</label>
+                    <input formControlName="numero" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="btn btn-warning form-control" (click)="excluirTelefone(i)">Excluir</button>
+                </div>
+                <br />
+            </div>
+            <button type="button" (click)="incluirTelefone()" class="btn btn-default">Adicionar Telefone</button>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Emails</h4>
+        </div>
+        <div formArrayName="emails" class="panel-body">
+            <div *ngFor="let email of emails.controls, let i = index;" class="row">
+                <h5>Email {{i + 1}}</h5>
+                <div class="form-group col-md-10">
+                    <label>Email</label>
+                    <input formControlName="email" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="btn btn-warning form-control" (click)="excluirEmail(i)">Excluir</button>
+                </div>
+                <br />
+            </div>
+            <button type="button" (click)="incluirEmail()" class="btn btn-default">Adicionar Email</button>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <input type="submit" name="save" value="Salvar Cliente" class="btn btn-primary" />
+                <input type="button" name="cancel" value="Cancelar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>

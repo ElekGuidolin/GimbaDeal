@@ -7,7 +7,8 @@ Begin
 	Select
 		C.Id,
 		C.Cnpj,
-		C.Nome
+		C.Nome,
+		C.Ativo
 	From Clientes As C
 	Where C.Ativo = 'true'
 End
