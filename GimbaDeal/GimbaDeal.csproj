@@ -25,19 +25,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="ClientApp\app\components\listar-clientes\listar-clientes.component.ts" />
 		<None Remove="ClientApp\app\core\services\cliente.service.ts" />
 		<None Remove="ClientApp\app\core\services\endereco.service.ts" />
+		<None Remove="ClientApp\app\shared\models\cliente-completo.model.ts" />
 		<None Remove="ClientApp\app\shared\models\cliente.model.ts" />
+		<None Remove="ClientApp\app\shared\models\complemento-endereco.model.ts" />
+		<None Remove="ClientApp\app\shared\models\email.model.ts" />
 		<None Remove="ClientApp\app\shared\models\endereco.model.ts" />
+		<None Remove="ClientApp\app\shared\models\socio.model.ts" />
+		<None Remove="ClientApp\app\shared\models\telefone.model.ts" />
+		<None Remove="ClientApp\app\shared\models\tipo-telefone.model.ts" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<TypeScriptCompile Include="ClientApp\app\components\listar-clientes\listar-clientes.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\listar-clientes.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\cliente.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\endereco.service.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\cliente-completo.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\cliente.model.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\complemento-endereco.model.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\email.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\endereco.model.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\socio.model.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\telefone.model.ts" />
+		<TypeScriptCompile Include="ClientApp\app\shared\models\tipo-telefone.model.ts" />
 	</ItemGroup>
 
 	<Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

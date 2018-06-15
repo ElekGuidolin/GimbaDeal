@@ -23,5 +23,12 @@ namespace GimbaDeal.Controllers
             var clientes = _clienteData.ListarTodos();
             return clientes;
         }
+
+        [HttpGet("[action]")]
+        public Cliente BuscarCliente(int id)
+        {
+            var cliente = _clienteData.Buscar(id);
+            return cliente;
+        }
     }
 }

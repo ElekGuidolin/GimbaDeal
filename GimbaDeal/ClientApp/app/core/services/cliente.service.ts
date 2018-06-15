@@ -8,9 +8,9 @@ import 'rxjs/add/operator/map';
 export class ClienteService {
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) { }
 
-    getCliente() {
-        return this.http.get(this.baseUrl + 'api/Cliente/ListarTodos')
-            .map((res: Response) => res.json().response);
+    getCliente(id: number): Observable<Cliente> {
+        return this.http.get(this.baseUrl + 'api/Cliente/BuscarCliente')
+                    .map((res: Response) => res.json() as Cliente);
     }
 
     getClientes(): Observable<Cliente[]> {

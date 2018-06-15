@@ -26,7 +26,8 @@ namespace GimbaDeal.Services
 
         public Cliente Buscar(int id)
         {
-            throw new NotImplementedException();
+            var cliente = _context.Set<Cliente>().FromSql("prRetornarCliente @Id = {0}", id).FirstOrDefault();
+            return cliente;
         }
 
         public bool Excluir(int id)

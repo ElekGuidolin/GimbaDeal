@@ -4,7 +4,7 @@ import { Cliente } from '../../shared/models/cliente.model';
 import { ClienteService } from '../../core/services/cliente.service';
 
 @Component({
-    selector: 'listar-clientea',
+    selector: 'listar-clientes',
     templateUrl: './listar-clientes.component.html',
     providers: [ClienteService]
 })
