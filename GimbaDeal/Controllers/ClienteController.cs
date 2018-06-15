@@ -9,9 +9,9 @@ namespace GimbaDeal.Controllers
     [Route("api/[controller]")]
     public class ClienteController : Controller
     {
-        private IClienteData _clienteData;
+        private IDataCliente _clienteData;
 
-        public ClienteController(IClienteData clienteData)
+        public ClienteController(IDataCliente clienteData)
         {
             _clienteData = clienteData;
         }
@@ -19,6 +19,7 @@ namespace GimbaDeal.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Cliente> ListarTodos()
         {
+            ViewData["Title"] = "Lista de Clientes";
             var clientes = _clienteData.ListarTodos();
             return clientes;
         }

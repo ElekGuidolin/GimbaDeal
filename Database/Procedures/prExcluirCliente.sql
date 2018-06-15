@@ -5,6 +5,8 @@ Create Procedure prExcluirCliente
 	@IdCliente		int
 As
 Begin
+
+	Declare @Erro int
 	Begin Transaction
 
 	EXEC prExcluirSocioPorCliente @IdCliente
@@ -18,10 +20,20 @@ Begin
 	Update Clientes
 		Set Ativo = 'false'
 			Where Id = @IdCliente
+	
+	Set @Erro = @@ERROR
+	Declare @Retorno bit
 
-	If(@@ERROR = 0)
+	If(@Erro = 0)
+	Begin
+		Set @Retorno = 'true'
 		Commit Transaction
+	End
 	Else
+	Begin
+		Set @Retorno = 'false'
 		Rollback Transaction
+	End
 
+	Select (@Retorno)
 End

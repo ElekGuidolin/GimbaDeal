@@ -4,12 +4,15 @@ Go
 Create Procedure prAtualizarEmailPorId
 	@Id			int,
 	@IdCliente	int				= NULL,
-	@Email		nvarchar(150)	= NULL
+	@Email		nvarchar(150)	= NULL,
+	@Ativo		bit				= NULL
 As
 Begin
 	Update Emails
 		Set Email = ISNULL(@Email, Email),
 			IdCliente = ISNULL(@IdCliente, IdCliente),
-			Ativo = 'true'
+			Ativo = ISNULL(@Ativo, 'true')
 				Where Id = @Id
+
+	Select @Id
 End

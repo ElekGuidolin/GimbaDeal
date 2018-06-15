@@ -6,7 +6,8 @@ Create Procedure prAtualizarComplementosEnderecoPorId
 	@IdCliente		int				= NULL,
 	@IdEndereco		int				= NULL,
 	@Numero			int				= NULL,
-	@Complemento	nvarchar(50)	= NULL
+	@Complemento	nvarchar(50)	= NULL,
+	@Ativo			bit				= NULL
 As
 Begin
 	Update ComplementosEndereco
@@ -14,6 +15,8 @@ Begin
 			IdEndereco = ISNULL(@IdEndereco, IdEndereco),
 			Numero = ISNULL(@Numero, Numero),
 			Complemento = ISNULL(@Complemento, Complemento),
-			Ativo = 'true'
+			Ativo = ISNULL(@Ativo, 'true')
 				Where Id = @Id
+
+	Select @Id
 End

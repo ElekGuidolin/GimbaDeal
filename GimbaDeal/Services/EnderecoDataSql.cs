@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GimbaDeal.Data;
+﻿using GimbaDeal.Data;
 using GimbaDeal.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GimbaDeal.Services
 {
-    public class EnderecoDataSql : IEnderecoData
+    public class EnderecoDataSql : IDataEndereco
     {
         private GimbaDealDbContext _context;
 
@@ -17,25 +16,25 @@ namespace GimbaDeal.Services
             _context = context;
         }
 
-        public int Atualizar(Endereco cliente)
+        public Endereco Incluir(Endereco entidade)
         {
-            throw new NotImplementedException();
+            var endereco = _context.Set<Endereco>().FromSql(
+                                "prIncluirEndereco @Cep = {0}, @Logradouro = {1}, @Complemento = {2}, @Bairro = {3}, @Localidade = {4}, @Uf = {5}",
+                                entidade.Cep, entidade.Logradouro, entidade.Complemento, entidade.Bairro, entidade.Localidade, entidade.UF).FirstOrDefault();
+            return endereco;
         }
 
-        public int Incluir(Endereco cliente)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Endereco> ListarTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Endereco Buscar(string cep)
+        public Endereco BuscarPorCep(string cep)
         {
             var endereco = _context.Set<Endereco>().FromSql("prRetornarEnderecosPorCep @Cep = {0}", cep);
             return endereco.FirstOrDefault();
         }
+
+        public Endereco BuscarPorCliente(int idCliente)
+        {
+            var endereco = _context.Set<Endereco>().FromSql("prRetornarEnderecosPorCep @Cep = {0}", idCliente);
+            return endereco.FirstOrDefault();
+        }
+
     }
 }

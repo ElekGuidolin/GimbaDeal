@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GimbaDeal.Data;
+using GimbaDeal.Models;
 using GimbaDeal.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,12 @@ namespace GimbaDeal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<GimbaDealDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GimbaDeal")));
-            services.AddScoped<IClienteData, ClienteDataSql>();
+            services.AddScoped<IDataCliente, ClienteDataSql>();
+            services.AddScoped<IDataEndereco, EnderecoDataSql>();
+            services.AddScoped<IDataHelper<ComplementoEndereco>, ComplementoEnderecoDataSql>();
+            services.AddScoped<IDataHelper<Emails>, EmailDataSql>();
+            services.AddScoped<IDataHelper<Socio>, SocioDataSql>();
+            services.AddScoped<IDataHelper<Telefone>, TelefoneDataSql>();
             services.AddMvc();
         }
 

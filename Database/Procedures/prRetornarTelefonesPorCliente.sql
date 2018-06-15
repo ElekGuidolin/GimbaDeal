@@ -5,8 +5,8 @@ Create Procedure prRetornarTelefonesPorCliente
 	@IdCliente	int
 As
 Begin
-	Select	TT.Id As 'TipoId',
-			TT.Nome As 'TipoName',
+	Select	TT.Id As 'IdTipoTelefone',
+			TT.Nome As 'NomeTipoTelefone',
 			T.Id,
 			T.Ddd,
 			T.Numero
