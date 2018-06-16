@@ -24,12 +24,5 @@ namespace GimbaDeal.Models
 
         [Required]
         public string UF { get; set; }
-
-        [Required]
-        public string Unidade { get; set; }
-
-        public string IBGE { get; set; }
-        public string Gia { get; set; }
-        public bool Erro { get; set; }
     }
 }

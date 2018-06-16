@@ -19,7 +19,6 @@ namespace GimbaDeal.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Cliente> ListarTodos()
         {
-            ViewData["Title"] = "Lista de Clientes";
             var clientes = _clienteData.ListarTodos();
             return clientes;
         }

@@ -9,6 +9,5 @@
     unidade?: string;
     ibge?: string;
     gia?: string;
-
     erro?: boolean;
 }

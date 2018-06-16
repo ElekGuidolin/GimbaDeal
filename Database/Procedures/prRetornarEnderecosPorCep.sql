@@ -5,7 +5,9 @@ Create Procedure prRetornarEnderecosPorCep
 	@Cep	nchar(8)
 As
 Begin
-	Select	E.Logradouro,
+	Select	E.Id,
+			E.Cep,
+			E.Logradouro,
 			E.Complemento,
 			E.Bairro,
 			E.Localidade,

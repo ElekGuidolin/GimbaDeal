@@ -32,6 +32,7 @@ export class IncluirClienteComponent {
 
     formCliente: FormGroup;
     tiposTelefone = tiposTelefone;
+    cepParaBusca: string = '';
 
     constructor(private fb: FormBuilder, private clienteService: ClienteService, private enderecoService: EnderecoService) {
         this.criarFormulario();
@@ -236,9 +237,9 @@ export class IncluirClienteComponent {
     }
 
     pesquisarCep() {
-        var cep: string = '04632010';
-        this.enderecoService.getEnderecoLocal(cep).subscribe(end => {
-            this.Endereco = end;
+        var _cep: string = this.cepParaBusca;
+        this.enderecoService.getEnderecoLocal(_cep).subscribe(end => {
+            this.configurarEndereco(end as Endereco);
         }, error => console.log(error));
     }
 }
