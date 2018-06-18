@@ -55,50 +55,50 @@ namespace GimbaDeal.Controllers
         [HttpPost("[action]")]
         public Cliente IncluirCliente([FromBody]ClienteCompleto clienteCompleto)
         {
-            using (var transaction = new CommittableTransaction(new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
+            try
             {
-                try
+                var cliente = _clienteData.Incluir(clienteCompleto.Cliente);
+
+                var endereco = _enderecoData.BuscarPorCep(clienteCompleto.Endereco.Cep);
+                if (endereco == null)
                 {
-                    var cliente = _clienteData.Incluir(clienteCompleto.Cliente);
-
-                    var endereco = _enderecoData.BuscarPorCep(clienteCompleto.Endereco.Cep);
-                    if (endereco == null)
-                    {
-                        endereco = _enderecoData.Incluir(clienteCompleto.Endereco);
-                    }
-
-                    clienteCompleto.ComplementoEndereco.IdCliente = cliente.Id;
-                    clienteCompleto.ComplementoEndereco.IdEndereco = endereco.Id;
-                    _complementoEnderecoData.Incluir(clienteCompleto.ComplementoEndereco);
-
-                    foreach (var socio in clienteCompleto.Socios)
-                    {
-                        socio.IdCliente = cliente.Id;
-                        _socioData.Incluir(socio);
-                    }
-
-                    foreach (var telefone in clienteCompleto.Telefones)
-                    {
-                        telefone.IdCliente = cliente.Id;
-                        _telefoneData.Incluir(telefone);
-                    }
-
-                    foreach (var email in clienteCompleto.Emails)
-                    {
-                        email.IdCliente = cliente.Id;
-                        _emailsData.Incluir(email);
-                    }
-
-                    transaction.Commit();
-                    return cliente;
+                    endereco = _enderecoData.Incluir(clienteCompleto.Endereco);
                 }
-                catch (Exception ex)
+
+                clienteCompleto.ComplementoEndereco.IdCliente = cliente.Id;
+                clienteCompleto.ComplementoEndereco.IdEndereco = endereco.Id;
+                _complementoEnderecoData.Incluir(clienteCompleto.ComplementoEndereco);
+
+                foreach (var socio in clienteCompleto.Socios)
                 {
-                    transaction.Rollback();
-                    throw ex;
+                    socio.IdCliente = cliente.Id;
+                    _socioData.Incluir(socio);
                 }
+
+                foreach (var telefone in clienteCompleto.Telefones)
+                {
+                    telefone.IdCliente = cliente.Id;
+                    _telefoneData.Incluir(telefone);
+                }
+
+                foreach (var email in clienteCompleto.Emails)
+                {
+                    email.IdCliente = cliente.Id;
+                    _emailsData.Incluir(email);
+                }
+
+                return cliente;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        [HttpDelete("[action]/{id}")]
+        public bool ExcluirCliente(int id)
+        {
+            return _clienteData.Excluir(id);
         }
     }
 }

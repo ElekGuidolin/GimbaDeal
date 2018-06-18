@@ -22,18 +22,11 @@ Begin
 			Where Id = @IdCliente
 	
 	Set @Erro = @@ERROR
-	Declare @Retorno bit
 
 	If(@Erro = 0)
-	Begin
-		Set @Retorno = 'true'
 		Commit Transaction
-	End
 	Else
-	Begin
-		Set @Retorno = 'false'
 		Rollback Transaction
-	End
 
-	Select (@Retorno)
+	Select Id, Nome, Cnpj, Ativo From Clientes Where Id = @IdCliente
 End

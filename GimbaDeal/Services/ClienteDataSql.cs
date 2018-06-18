@@ -32,7 +32,7 @@ namespace GimbaDeal.Services
 
         public bool Excluir(int id)
         {
-            var cliente = _context.Set<Cliente>().FromSql("prExcluirCliente @Id = {0}", id).FirstOrDefault();
+            var cliente = _context.Set<Cliente>().FromSql("prExcluirCliente @IdCliente = {0}", id).FirstOrDefault();
             return !cliente.Ativo;
         }
 

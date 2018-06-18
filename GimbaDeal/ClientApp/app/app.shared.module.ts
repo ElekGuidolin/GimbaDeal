@@ -7,11 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { ClienteService } from './core/services/cliente.service';
-import { ListarClientesComponent } from './components/clientes/listar-clientes.component';
-import { IncluirClienteComponent } from './components/clientes/incluir-cliente.component';
+import { ListarClientesComponent } from './components/clientes/listar-clientes/listar-clientes.component';
+import { IncluirClienteComponent } from './components/clientes/incluir-cliente/incluir-cliente.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
     providers: [
@@ -25,21 +25,19 @@ import { IncluirClienteComponent } from './components/clientes/incluir-cliente.c
         CommonModule,
         HttpModule,
         FormsModule,
+        ModalModule.forRoot(),
+        AlertModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
             { path: 'listar-clientes', component: ListarClientesComponent },
             { path: 'incluir-cliente', component: IncluirClienteComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         ListarClientesComponent,
         IncluirClienteComponent,
         HomeComponent

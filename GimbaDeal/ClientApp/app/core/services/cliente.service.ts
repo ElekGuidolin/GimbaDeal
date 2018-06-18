@@ -27,4 +27,9 @@ export class ClienteService {
         return this.http.post(this.baseUrl + 'api/Cliente/IncluirCliente', body, options)
             .map((res: Response) => res.json() as Cliente);
     }
+
+    excluirCliente(id: number) : Observable<boolean> {
+        return this.http.delete(this.baseUrl + 'api/Cliente/ExcluirCliente/' + id)
+            .map((res: Response) => res.json() as boolean);
+    }
 }

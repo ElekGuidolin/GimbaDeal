@@ -1,0 +1,43 @@
+﻿<h1>Clientes</h1>
+
+<p *ngIf="!clientes"><em>Loading...</em></p>
+
+<alert type="success" [dismissible]="alertsDismissible" [dismissOnTimeout]="alertTimeout" *ngIf="mostrarSucesso">
+    <strong>OK!</strong> Cliente excluído com sucesso.
+</alert>
+<alert type="danger" [dismissible]="alertsDismissible" [dismissOnTimeout]="alertTimeout" *ngIf="mostrarErro">
+    <strong>Erro!</strong> Ocorreu um erro ao excluir o cliente.
+</alert>
+
+<table class='table' *ngIf="clientes">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clientes">
+            <td class="col-md-6">{{ cliente.nome }}</td>
+            <td class="col-md-3">{{ cliente.cnpj }}</td>
+            <td class="col-md-3">
+                <button (click)="alterarCliente(cliente.id)" class="btn btn-warning">Alterar</button>
+                <button (click)="confirmarExclusao(cliente.id, cliente.nome, template)" class="btn btn-danger">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #template>
+    <div class="modal-header text-danger">
+        <h4>Confirmação necessária</h4>
+    </div>
+    <div class="modal-body text-center">
+        <p class="multi_lines_text">{{confirmMessage}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="excluirCliente()">Sim</button>
+        <button type="button" class="btn btn-default" (click)="fecharModal()">Não</button>
+    </div>
+</ng-template>

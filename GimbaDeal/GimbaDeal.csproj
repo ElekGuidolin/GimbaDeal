@@ -42,8 +42,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente.component.ts" />
-		<TypeScriptCompile Include="ClientApp\app\components\clientes\listar-clientes.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente\incluir-cliente.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\listar-clientes\listar-clientes.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\cliente.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\complemento-endereco.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\email.service.ts" />

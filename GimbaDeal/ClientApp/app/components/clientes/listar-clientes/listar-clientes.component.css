@@ -1,0 +1,7 @@
+﻿body {
+}
+
+.multi_lines_text {
+    font-weight: bold;
+    white-space: pre-line;
+}
