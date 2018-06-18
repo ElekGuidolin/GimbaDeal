@@ -1,21 +1,22 @@
 ﻿import { Component, Inject, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
-import { ClienteService } from '../../core/services/cliente.service';
+import { ClienteService } from '../../../core/services/cliente.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ClienteCompleto } from '../../shared/models/cliente-completo.model';
-import { Cliente } from '../../shared/models/cliente.model';
-import { Socio } from '../../shared/models/socio.model';
-import { Telefone } from '../../shared/models/telefone.model';
-import { Email } from '../../shared/models/email.model';
-import { Endereco } from '../../shared/models/endereco.model';
-import { ComplementoEndereco } from '../../shared/models/complemento-endereco.model';
-import { tiposTelefone } from '../../shared/models/tipo-telefone.model';
-import { EnderecoService } from '../../core/services/endereco.service';
+import { ClienteCompleto } from '../../../shared/models/cliente-completo.model';
+import { Cliente } from '../../../shared/models/cliente.model';
+import { Socio } from '../../../shared/models/socio.model';
+import { Telefone } from '../../../shared/models/telefone.model';
+import { Email } from '../../../shared/models/email.model';
+import { Endereco } from '../../../shared/models/endereco.model';
+import { ComplementoEndereco } from '../../../shared/models/complemento-endereco.model';
+import { tiposTelefone } from '../../../shared/models/tipo-telefone.model';
+import { EnderecoService } from '../../../core/services/endereco.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'incluir-cliente',
-    templateUrl: './modificar-cliente.component.html',
-    styleUrls: ['./modificar-cliente.component.css'],
+    templateUrl: '../shared/modificar-cliente.component.html',
+    styleUrls: ['../shared/modificar-cliente.component.css'],
     providers: [ClienteService, EnderecoService]
 })
 
@@ -33,8 +34,16 @@ export class IncluirClienteComponent {
     formCliente: FormGroup;
     tiposTelefone = tiposTelefone;
     cepParaBusca: string = '';
+    alertsDismissible: boolean;
+    mostrarSucesso: boolean;
+    mostrarErro: boolean;
+    alertTimeout: number;
 
-    constructor(private fb: FormBuilder, private clienteService: ClienteService, private enderecoService: EnderecoService) {
+    constructor(private fb: FormBuilder, private clienteService: ClienteService, private enderecoService: EnderecoService, private router: Router) {
+        this.alertsDismissible = true;
+        this.mostrarSucesso = false;
+        this.mostrarErro = false;
+        this.alertTimeout = 10000;
         this.criarFormulario();
     }
 
@@ -72,7 +81,11 @@ export class IncluirClienteComponent {
 
     onSubmit() {
         this.novoCliente = this.prepararIncluirCliente();
-        this.clienteService.incluirCliente(this.novoCliente).subscribe(/* error handling */);
+        this.clienteService.incluirCliente(this.novoCliente).subscribe(cliente => {
+            this.router.navigate(['/listar-clientes']);
+        }, error => {
+            this.mostrarErro = true;
+        });
         this.refazerFormulario();
     }
 

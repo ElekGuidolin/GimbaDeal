@@ -1,5 +1,13 @@
 ﻿<h1>Incluir Clientes</h1>
 <p style="color:red;">Todos os campos são obrigatórios</p>
+
+<alert type="success" [dismissible]="alertsDismissible" [dismissOnTimeout]="alertTimeout" *ngIf="mostrarSucesso">
+    <strong>OK!</strong> Cliente incluído com sucesso.
+</alert>
+<alert type="danger" [dismissible]="alertsDismissible" [dismissOnTimeout]="alertTimeout" *ngIf="mostrarErro">
+    <strong>Erro!</strong> Ocorreu um erro ao incluir o cliente.
+</alert>
+
 <form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
     <div class="panel panel-default">
 
