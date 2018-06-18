@@ -13,5 +13,5 @@ Begin
 	Insert Into Enderecos (Cep, Logradouro, Complemento, Bairro, Localidade, Uf)
 	Values (@Cep, @Logradouro, @Complemento, @Bairro, @Localidade, @Uf)
 
-	Select @@IDENTITY
+	Select Id, Cep, Logradouro, Complemento, Bairro, Localidade, Uf From Enderecos Where Id = @@IDENTITY
 End

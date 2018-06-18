@@ -26,7 +26,11 @@
 
 	<ItemGroup>
 		<None Remove="ClientApp\app\core\services\cliente.service.ts" />
+		<None Remove="ClientApp\app\core\services\complemento-endereco.service.ts" />
+		<None Remove="ClientApp\app\core\services\email.service.ts" />
 		<None Remove="ClientApp\app\core\services\endereco.service.ts" />
+		<None Remove="ClientApp\app\core\services\socio.service.ts" />
+		<None Remove="ClientApp\app\core\services\telefone.service.ts" />
 		<None Remove="ClientApp\app\shared\models\cliente-completo.model.ts" />
 		<None Remove="ClientApp\app\shared\models\cliente.model.ts" />
 		<None Remove="ClientApp\app\shared\models\complemento-endereco.model.ts" />
@@ -41,7 +45,11 @@
 		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\components\clientes\listar-clientes.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\cliente.service.ts" />
+		<TypeScriptCompile Include="ClientApp\app\core\services\complemento-endereco.service.ts" />
+		<TypeScriptCompile Include="ClientApp\app\core\services\email.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\endereco.service.ts" />
+		<TypeScriptCompile Include="ClientApp\app\core\services\socio.service.ts" />
+		<TypeScriptCompile Include="ClientApp\app\core\services\telefone.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\cliente-completo.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\cliente.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\complemento-endereco.model.ts" />

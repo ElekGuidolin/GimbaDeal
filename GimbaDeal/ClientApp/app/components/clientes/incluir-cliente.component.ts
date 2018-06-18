@@ -1,7 +1,7 @@
 ﻿import { Component, Inject, Input, OnChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { ClienteService } from '../../core/services/cliente.service';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClienteCompleto } from '../../shared/models/cliente-completo.model';
 import { Cliente } from '../../shared/models/cliente.model';
 import { Socio } from '../../shared/models/socio.model';
@@ -14,8 +14,8 @@ import { EnderecoService } from '../../core/services/endereco.service';
 
 @Component({
     selector: 'incluir-cliente',
-    templateUrl: './incluir-cliente.component.html',
-    styleUrls: ['./incluir-cliente.component.css'],
+    templateUrl: './modificar-cliente.component.html',
+    styleUrls: ['./modificar-cliente.component.css'],
     providers: [ClienteService, EnderecoService]
 })
 
@@ -32,6 +32,7 @@ export class IncluirClienteComponent {
 
     formCliente: FormGroup;
     tiposTelefone = tiposTelefone;
+    cepParaBusca: string = '';
 
     constructor(private fb: FormBuilder, private clienteService: ClienteService, private enderecoService: EnderecoService) {
         this.criarFormulario();
@@ -67,6 +68,48 @@ export class IncluirClienteComponent {
 
     ngOnInit() {
         this.iniciarInterfaces();
+    }
+
+    onSubmit() {
+        this.novoCliente = this.prepararIncluirCliente();
+        this.clienteService.incluirCliente(this.novoCliente).subscribe(/* error handling */);
+        this.refazerFormulario();
+    }
+
+    prepararIncluirCliente(): ClienteCompleto {
+        const formModel = this.formCliente.value;
+
+        const novoCliente: Cliente = formModel.cliente;
+        const novoEndereco: Endereco = formModel.endereco;
+        const novoComplementoEndereco: ComplementoEndereco = formModel.complementoEndereco;
+
+        // deep copy of form model socios
+        const copiaCompletaSocios: Socio[] = formModel.socios.map(
+            (socio: Socio) => Object.assign({}, socio)
+        );
+
+        // deep copy of form model telefones
+        const copiaCompletaTelefones: Telefone[] = formModel.telefones.map(
+            (telefone: Telefone) => Object.assign({}, telefone)
+        );
+
+        // deep copy of form model telefones
+        const copiaCompletaEmails: Email[] = formModel.emails.map(
+            (email: Email) => Object.assign({}, email)
+        );
+
+        // return new `ClienteCompleto` object containing a combination of original cliente value(s)
+        // and deep copies of changed form model values
+        const salvarCliente: ClienteCompleto = {
+            cliente: novoCliente,
+            endereco: novoEndereco,
+            complementoEndereco: novoComplementoEndereco,
+            socios: copiaCompletaSocios,
+            telefones: copiaCompletaTelefones,
+            emails: copiaCompletaEmails
+        };
+
+        return salvarCliente;
     }
 
     iniciarInterfaces() {
@@ -129,7 +172,7 @@ export class IncluirClienteComponent {
     iniciarTelefone(): void {
         this.Telefone = {
             id: 0,
-            idTipoTelefone: 1,
+            idTipoTelefone: 0,
             idCliente: 0,
             ddd: '',
             numero: '',
@@ -236,9 +279,29 @@ export class IncluirClienteComponent {
     }
 
     pesquisarCep() {
-        var cep: string = '04632010';
-        this.enderecoService.getEnderecoLocal(cep).subscribe(end => {
-            this.Endereco = end;
+        var _cep: string = this.cepParaBusca;
+
+        if (_cep == '') {
+            this.iniciarEndereco();
+            this.configurarEndereco(this.Endereco);
+            return;
+        }
+
+        this.enderecoService.getEnderecoLocal(_cep).subscribe(end => {
+            if (end) {
+                this.configurarEndereco(end as Endereco);
+            }
+            else {
+                this.enderecoService.getEnderecoWs(_cep).subscribe(endws => {
+                    if (endws) {
+                        endws.cep = endws.cep.replace('-', '');
+                        this.configurarEndereco(endws as Endereco);
+                    }
+                    else {
+                        alert('CEP inexistente favor digitar um CEP válido!')
+                    }
+                }, error => console.log(error))
+            }
         }, error => console.log(error));
     }
 }

@@ -11,6 +11,7 @@ export class EnderecoService {
     getEnderecoLocal(cep: string): Observable<Endereco> {
         return this.http.get(this.baseUrl + 'api/Endereco/BuscarPorCep/' + cep)
             .map((res: Response) => res.json() as Endereco);
+    //No catch chamar o Ws !!!
     }
 
     getEnderecoWs(cep: string): Observable<Endereco> {

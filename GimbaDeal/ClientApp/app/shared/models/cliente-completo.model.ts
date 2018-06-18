@@ -10,6 +10,6 @@ export interface ClienteCompleto {
     endereco: Endereco;
     complementoEndereco: ComplementoEndereco;
     socios: Socio[];
-    emails: Email[];
     telefones: Telefone[];
+    emails: Email[];
 }

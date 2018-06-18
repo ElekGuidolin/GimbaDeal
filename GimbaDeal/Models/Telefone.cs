@@ -8,7 +8,7 @@ namespace GimbaDeal.Models
         public int Id { get; set; }
 
         [Required]
-        public short IdTipoTelefone { get; set; }
+        public int IdTipoTelefone { get; set; }
 
         public string NomeTipoTelefone { get; set; }
 

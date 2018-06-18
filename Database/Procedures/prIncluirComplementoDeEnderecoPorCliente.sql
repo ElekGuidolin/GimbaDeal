@@ -10,4 +10,6 @@ As
 Begin
 	Insert Into ComplementosEndereco(IdCliente, IdEndereco, Numero, Complemento, Ativo)
 	Values(@IdCliente, @IdEndereco, @Numero, @Complemento,'true')
+
+	Select Id, IdCliente, IdEndereco, Numero, Complemento, Ativo From ComplementosEndereco Where Id = @@IDENTITY
 End

@@ -1,5 +1,5 @@
 ﻿<h1>Incluir Clientes</h1>
-<p>Todos os campos são obrigatórios</p>
+<p style="color:red;">Todos os campos são obrigatórios</p>
 <form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
     <div class="panel panel-default">
 
@@ -11,11 +11,11 @@
                 <input name="id" id="id" type="hidden" />
                 <div class="form-group col-md-6">
                     <label>Nome</label>
-                    <input formControlName="nome" class="form-control" />
+                    <input formControlName="nome" class="form-control" required />
                 </div>
                 <div class="form-group col-md-6">
                     <label>CNPJ</label>
-                    <input formControlName="cnpj" maxlength="14" class="form-control" />
+                    <input formControlName="cnpj" maxlength="14" class="form-control" required />
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div [formGroup]="endereco" class="row">
                 <div class="form-group col-md-4">
                     <label>Cep</label>
-                    <input  formControlName="cep" maxlength="8" class="form-control" (blur)="pesquisarCep()" />
+                    <input formControlName="cep" [(ngModel)]="cepParaBusca" maxlength="8" class="form-control" (blur)="pesquisarCep();" required />
                 </div>
                 <div class="form-group col-md-4">
                     <label>Localidade</label>
@@ -55,11 +55,11 @@
             <div [formGroup]="complementoEndereco" class="row">
                 <div class="form-group col-md-3">
                     <label>Número</label>
-                    <input name="numero" class="form-control" />
+                    <input formControlName="numero" class="form-control" required />
                 </div>
                 <div class="form-group col-md-3">
                     <label>Complemento</label>
-                    <input name="complemento" class="form-control" />
+                    <input formControlName="complemento" class="form-control" required />
                 </div>
             </div>
         </div>
@@ -72,11 +72,11 @@
                 <h5>Sócio {{i + 1}}</h5>
                 <div class="form-group col-md-5">
                     <label>Nome Sócio</label>
-                    <input formControlName="nome" class="form-control" />
+                    <input formControlName="nome" class="form-control" required />
                 </div>
                 <div class="form-group col-md-5">
                     <label>Cpf</label>
-                    <input formControlName="cpf" maxlength="11" class="form-control" />
+                    <input formControlName="cpf" maxlength="11" class="form-control" required />
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-warning form-control" (click)="excluirSocio(i)">Excluir</button>
@@ -90,21 +90,21 @@
             <h4>Telefones</h4>
         </div>
         <div formArrayName="telefones" class="panel-body">
-            <div *ngFor="let telefone of telefones.controls; let i = index;" class="row">
+            <div *ngFor="let telefone of telefones.controls; let i = index;" [formGroupName]="i" class="row">
                 <h5>Telefone {{i + 1}}</h5>
                 <div class="form-group col-md-3">
                     <label for="tipoTelefone">Tipo Telefone</label>
-                    <select formControlName="idTipoTelefone" class="form-control">
+                    <select formControlName="idTipoTelefone" class="form-control" required>
                         <option *ngFor="let tipo of tiposTelefone" [value]="tipo.id">{{tipo.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label>DDD</label>
-                    <input formControlName="ddd" class="form-control" />
+                    <input formControlName="ddd" maxlength="2" class="form-control" required />
                 </div>
                 <div class="form-group col-md-4">
                     <label>Número</label>
-                    <input formControlName="numero" class="form-control" />
+                    <input formControlName="numero" maxlength="9" class="form-control" required />
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-warning form-control" (click)="excluirTelefone(i)">Excluir</button>
@@ -118,11 +118,11 @@
             <h4>Emails</h4>
         </div>
         <div formArrayName="emails" class="panel-body">
-            <div *ngFor="let email of emails.controls, let i = index;" class="row">
+            <div *ngFor="let email of emails.controls, let i = index;" [formGroupName]="i" class="row">
                 <h5>Email {{i + 1}}</h5>
                 <div class="form-group col-md-10">
                     <label>Email</label>
-                    <input formControlName="email" class="form-control" />
+                    <input formControlName="email" class="form-control" required />
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-warning form-control" (click)="excluirEmail(i)">Excluir</button>
@@ -134,8 +134,8 @@
 
         <div class="panel-footer">
             <div class="row">
-                <input type="submit" name="save" value="Salvar Cliente" class="btn btn-primary" />
-                <input type="button" name="cancel" value="Cancelar" class="btn btn-default" />
+                <input type="submit" [disabled]="formCliente.pristine" name="save" value="Salvar Cliente" class="btn btn-primary" />
+                <input type="button" [disabled]="formCliente.pristine" name="cancel" value="Cancelar" class="btn btn-default" />
             </div>
         </div>
     </div>

@@ -8,4 +8,6 @@ As
 Begin
 	Insert Into Emails(Email, IdCliente, Ativo)
 	Values (@Email, @IdCliente, 'true')
+
+	Select Id, Email, IdCliente, Ativo From Emails Where Id = @@IDENTITY
 End
