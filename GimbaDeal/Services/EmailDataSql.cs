@@ -38,7 +38,7 @@ namespace GimbaDeal.Services
         public Emails Incluir(Emails entidade)
         {
             var email = _context.Set<Emails>().FromSql(
-                                "prIncluirEmailPorCliente @IdCliente = {1}, @Email = {2}",
+                                "prIncluirEmailPorCliente @IdCliente = {0}, @Email = {1}",
                                 entidade.IdCliente, entidade.Email).FirstOrDefault();
             return email;
         }

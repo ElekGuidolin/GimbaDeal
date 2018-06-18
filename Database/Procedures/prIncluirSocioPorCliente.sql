@@ -9,4 +9,6 @@ As
 Begin
 	Insert Into Socios
 	Values(@Nome, @Cpf, @IdCliente, 'true')
+
+	Select Id, Nome, Cpf, IdCliente, Ativo From Socios Where Id = @@IDENTITY
 End

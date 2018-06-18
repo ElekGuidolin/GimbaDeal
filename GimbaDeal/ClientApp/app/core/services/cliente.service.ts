@@ -1,20 +1,30 @@
 ﻿import { Injectable, Inject } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Cliente } from "../../shared/models/cliente.model";
+import { Http, Response, RequestOptions, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { Cliente } from "../../shared/models/cliente.model";
+import { ClienteCompleto } from "../../shared/models/cliente-completo.model";
 
 @Injectable()
 export class ClienteService {
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) { }
 
-    getCliente(id: number): Observable<Cliente> {
+    buscarCliente(id: number): Observable<ClienteCompleto> {
         return this.http.get(this.baseUrl + 'api/Cliente/BuscarCliente')
-                    .map((res: Response) => res.json() as Cliente);
+                    .map((res: Response) => res.json() as ClienteCompleto);
     }
 
-    getClientes(): Observable<Cliente[]> {
+    buscarClientes(): Observable<Cliente[]> {
         return this.http.get(this.baseUrl + 'api/Cliente/ListarTodos')
                     .map((res: Response) => res.json() as Cliente[]);
+    }
+
+    incluirCliente(clienteCompleto: ClienteCompleto): Observable<Cliente> {
+        let localHeaders = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: localHeaders });
+        let body = JSON.stringify(clienteCompleto);
+
+        return this.http.post(this.baseUrl + 'api/Cliente/IncluirCliente', body, options)
+            .map((res: Response) => res.json() as Cliente);
     }
 }

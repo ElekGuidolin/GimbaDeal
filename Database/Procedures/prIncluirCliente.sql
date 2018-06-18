@@ -9,5 +9,5 @@ Begin
 	Insert Into Clientes(Nome, Cnpj, Ativo)
 	Values (@Nome, @Cnpj, 'true')
 
-	Select @@IDENTITY
+	Select Id, Nome, Cnpj, Ativo From Clientes Where Id = @@IDENTITY
 End

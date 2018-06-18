@@ -16,11 +16,11 @@ export class ListarClientesComponent {
     }
 
     ngOnInit() {
-        this.getClientes();
+        this.buscarClientes();
     }
 
-    getClientes(): void {
-        this.clienteService.getClientes().subscribe(clientes => {
+    buscarClientes(): void {
+        this.clienteService.buscarClientes().subscribe(clientes => {
             this.clientes = clientes;
         }, error => console.log(error));
     }
