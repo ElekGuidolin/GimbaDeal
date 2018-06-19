@@ -21,15 +21,56 @@ import { Router } from '@angular/router';
 })
 
 export class IncluirClienteComponent {
+    
+    private Cliente: Cliente = {
+        id: 0,
+        nome: '',
+        cnpj: '',
+        ativo: true
+    };
+
+    private Endereco: Endereco = {
+        id: 0,
+        cep: '',
+        localidade: '',
+        uf: '',
+        logradouro: '',
+        bairro: '',
+        complemento: ''
+    };
+
+    private ComplementoEndereco: ComplementoEndereco = {
+        id: 0,
+        idCliente: 0,
+        idEndereco: 0,
+        numero: 0,
+        complemento: '',
+        ativo: true
+    };
+
+    private Email: Email = {
+        id: 0,
+        idCliente: 0,
+        email: '',
+        ativo: true
+    };
+
+    private Socio: Socio = {
+        id: 0,
+        nome: '',
+        cpf: ''
+    };
+
+    private Telefone: Telefone = {
+        id: 0,
+        idTipoTelefone: 0,
+        idCliente: 0,
+        ddd: '',
+        numero: '',
+        ativo: true
+    };
 
     @Input() novoCliente: ClienteCompleto;
-
-    private Cliente: Cliente;
-    private Endereco: Endereco;
-    private ComplementoEndereco: ComplementoEndereco;
-    private Email: Email;
-    private Socio: Socio;
-    private Telefone: Telefone;
 
     formCliente: FormGroup;
     tiposTelefone = tiposTelefone;
@@ -44,11 +85,12 @@ export class IncluirClienteComponent {
         this.mostrarSucesso = false;
         this.mostrarErro = false;
         this.alertTimeout = 10000;
-        this.criarFormulario();
+        this.formCliente = this.criarFormulario();
+        this.novoCliente = this.prepararIncluirCliente();
     }
 
-    criarFormulario() {
-        this.formCliente = this.fb.group({
+    criarFormulario(): FormGroup {
+        return this.fb.group({
             cliente: this.fb.group({
                 nome: '',
                 cnpj: '',
@@ -73,10 +115,6 @@ export class IncluirClienteComponent {
             telefones: this.fb.array([]),
             emails: this.fb.array([]),
         });
-    }
-
-    ngOnInit() {
-        this.iniciarInterfaces();
     }
 
     onSubmit() {
@@ -123,74 +161,6 @@ export class IncluirClienteComponent {
         };
 
         return salvarCliente;
-    }
-
-    iniciarInterfaces() {
-        this.iniciarCliente();
-        this.iniciarEndereco();
-        this.iniciarSocio();
-        this.iniciarEmail();
-        this.iniciarTelefone();
-    }
-
-    iniciarCliente(): void {
-        this.Cliente = {
-            id: 0,
-            nome: '',
-            cnpj: '',
-            ativo: true
-        }
-    }
-
-    iniciarEndereco(): void {
-        this.Endereco = {
-            id: 0,
-            cep: '',
-            localidade: '',
-            uf: '',
-            logradouro: '',
-            bairro: '',
-            complemento: ''
-        }
-    }
-
-    iniciarComplementoEndereco(): void {
-        this.ComplementoEndereco = {
-            id: 0,
-            idCliente: 0,
-            idEndereco: 0,
-            numero: 0,
-            complemento: '',
-            ativo: true
-        }
-    }
-
-    iniciarSocio(): void {
-        this.Socio = {
-            id: 0,
-            nome: '',
-            cpf: ''
-        };
-    }
-
-    iniciarEmail(): void {
-        this.Email = {
-            id: 0,
-            idCliente: 0,
-            email: '',
-            ativo: true
-        }
-    }
-
-    iniciarTelefone(): void {
-        this.Telefone = {
-            id: 0,
-            idTipoTelefone: 0,
-            idCliente: 0,
-            ddd: '',
-            numero: '',
-            ativo: true
-        }
     }
 
     ngOnChanges() {
@@ -291,11 +261,35 @@ export class IncluirClienteComponent {
         this.telefones.removeAt(index);
     }
 
+    iniciarEndereco(): void {
+        this.Endereco = {
+            id: 0,
+            cep: '',
+            localidade: '',
+            uf: '',
+            logradouro: '',
+            bairro: '',
+            complemento: ''
+        }
+    }
+
+    iniciarComplementoEndereco(): void {
+        this.ComplementoEndereco = {
+            id: 0,
+            idCliente: 0,
+            idEndereco: 0,
+            numero: 0,
+            complemento: '',
+            ativo: true
+        }
+    }
+
     pesquisarCep() {
         var _cep: string = this.cepParaBusca;
 
         if (_cep == '') {
             this.iniciarEndereco();
+            this.iniciarComplementoEndereco();
             this.configurarEndereco(this.Endereco);
             return;
         }
