@@ -214,6 +214,10 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
+# App Settings json file.
+appsettings.json
+appsettings.Development.json
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
