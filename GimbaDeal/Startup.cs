@@ -26,7 +26,7 @@ namespace GimbaDeal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GimbaDealDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GimbaDeal")));
+            services.AddDbContext<GimbaDealDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EntrevistaDealGimba")));
             services.AddScoped<IDataCliente, ClienteDataSql>();
             services.AddScoped<IDataEndereco, EnderecoDataSql>();
             services.AddScoped<IDataHelper<ComplementoEndereco>, ComplementoEnderecoDataSql>();

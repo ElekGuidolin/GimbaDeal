@@ -12,20 +12,20 @@ import { Cliente } from '../../../shared/models/cliente.model';
 })
 
 export class ListarClientesComponent {
-    private clientes: Cliente[];
-    modalRef: BsModalRef;
-    confirmMessage: string;
-    clienteParaExcluir: number;
-    alertsDismissible: boolean;
-    mostrarSucesso: boolean;
-    mostrarErro: boolean;
-    alertTimeout: number;
+    public clientes: Cliente[];
+    
+    confirmMessage: string = '';
+    clienteParaExcluir: number = 0;
+    alertsDismissible: boolean = true;
+    mostrarSucesso: boolean = false;
+    mostrarErro: boolean = false;
+    alertTimeout: number = 3000;
+    modalRef: BsModalRef = {
+        hide: () => { }
+    };
 
     constructor(private clienteService: ClienteService, public modalService: BsModalService) {
-        this.alertsDismissible = true;
-        this.mostrarSucesso = false;
-        this.mostrarErro = false;
-        this.alertTimeout = 3000;
+        this.clientes = [];
     }
 
     ngOnInit() {
