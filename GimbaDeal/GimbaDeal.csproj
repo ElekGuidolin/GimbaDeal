@@ -25,6 +25,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="ClientApp\app\components\clientes\incluir-cliente\incluir-cliente.component.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-cliente.component.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-complemento-endereco.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-emails.component.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-endereco.component.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-socios.component.ts" />
+		<None Remove="ClientApp\app\components\clientes\shared\form-group-telefones.component.ts" />
 		<None Remove="ClientApp\app\core\services\cliente.service.ts" />
 		<None Remove="ClientApp\app\core\services\complemento-endereco.service.ts" />
 		<None Remove="ClientApp\app\core\services\email.service.ts" />
@@ -43,7 +50,14 @@
 
 	<ItemGroup>
 		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente\incluir-cliente.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\incluir-cliente\incluir-cliente.old.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\components\clientes\listar-clientes\listar-clientes.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-cliente.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-complemento-endereco.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-emails.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-endereco.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-socios.component.ts" />
+		<TypeScriptCompile Include="ClientApp\app\components\clientes\shared\form-group-telefones.component.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\cliente.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\complemento-endereco.service.ts" />
 		<TypeScriptCompile Include="ClientApp\app\core\services\email.service.ts" />
@@ -58,6 +72,10 @@
 		<TypeScriptCompile Include="ClientApp\app\shared\models\socio.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\telefone.model.ts" />
 		<TypeScriptCompile Include="ClientApp\app\shared\models\tipo-telefone.model.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ClientApp\app\shared\directives\" />
 	</ItemGroup>
 
 	<Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

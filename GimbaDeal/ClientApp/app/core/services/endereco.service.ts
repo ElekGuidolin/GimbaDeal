@@ -1,8 +1,8 @@
-﻿import { Injectable, Inject } from "@angular/core";
+﻿import { Inject, Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { Endereco } from "../../shared/models/endereco.model";
-import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class EnderecoService {
@@ -11,7 +11,6 @@ export class EnderecoService {
     getEnderecoLocal(cep: string): Observable<Endereco> {
         return this.http.get(this.baseUrl + 'api/Endereco/BuscarPorCep/' + cep)
             .map((res: Response) => res.json() as Endereco);
-    //No catch chamar o Ws !!!
     }
 
     getEnderecoWs(cep: string): Observable<Endereco> {

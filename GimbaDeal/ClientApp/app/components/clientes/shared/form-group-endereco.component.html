@@ -1,0 +1,40 @@
+﻿<div class="panel-body">
+    <div [formGroup]="grupoEndereco" class="row">
+        <div class="form-group col-md-4">
+            <label>Cep <small class="smallTip">(Apenas Números)</small></label>
+            <input formControlName="cep" [(ngModel)]="cepParaBusca" maxlength="8" class="form-control" (blur)="pesquisarCep();" required />
+
+            <div *ngIf="cep.invalid && (cep.dirty || cep.touched)" class="alert alert-danger">
+                <div *ngIf="cep.errors.required">
+                    O CEP é obrigatório.
+                </div>
+                <div *ngIf="cep.errors.minlength">
+                    O CEP deve ter 8 dígitos.
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Localidade</label>
+            <input formControlName="localidade" readonly="readonly" class="form-control" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>UF</label>
+            <input formControlName="uf" readonly="readonly" class="form-control" />
+        </div>
+    </div>
+    <div [formGroup]="endereco" class="row">
+        <div class="form-group col-md-4">
+            <label>Logradouro</label>
+            <input formControlName="logradouro" readonly="readonly" class="form-control" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Bairro</label>
+            <input formControlName="bairro" readonly="readonly" class="form-control" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Complemento de CEP</label>
+            <input formControlName="complemento" readonly="readonly" class="form-control" />
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,43 @@
+﻿<h1>Incluir Clientes</h1>
+<p style="color:red;">Todos os campos são obrigatórios</p>
+
+<form [formGroup]="formCompleto" (ngSubmit)="register(formCompleto)">
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h4>Cliente</h4>
+        </div>
+        <form-group-cliente [formGroup]="clienteFormGroup"></form-group-cliente>
+
+        <div class="panel-heading">
+            <h4>Endereço</h4>
+        </div>
+        <!--<form-group-endereco></form-group-endereco>-->
+
+        <div class="panel-heading">
+            <h4>Sócios</h4>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Telefones</h4>
+        </div>
+
+        <div class="panel-heading">
+            <h4>Emails</h4>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <input type="submit" name="save" value="Salvar Cliente" class="btn btn-primary" />
+                <input type="button" name="cancel" value="Cancelar" class="btn btn-default" />
+            </div>
+            <alert type="success" [dismissible]="alertsDismissible" *ngIf="mostrarSucesso">
+                <strong>OK!</strong> Cliente incluído com sucesso.
+            </alert>
+            <alert type="danger" [dismissible]="alertsDismissible" *ngIf="mostrarErro">
+                <strong>Erro!</strong> Ocorreu um erro ao incluir o cliente.
+            </alert>
+        </div>
+    </div>
+</form>

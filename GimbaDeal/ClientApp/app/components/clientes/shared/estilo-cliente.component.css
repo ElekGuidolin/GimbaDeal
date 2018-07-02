@@ -1,4 +1,7 @@
-﻿.form-inline .form-group {
+﻿body{
+    background-color:blue;
+}
+.form-inline .form-group {
     margin-bottom: 10px;
 }
 
@@ -7,7 +10,7 @@
     vertical-align: middle;
 }
 
-.panel-body .row h5{
+.panel-body .row h5 {
     padding-left: 15px;
     font-weight: bold;
 }
@@ -16,7 +19,11 @@
     margin-top: 25px;
 }
 
-.panel-footer .row{
+small.smallTip {
+    color: red !important;
+}
+
+.panel-footer .row {
     padding-left: 15px;
 }
 
@@ -30,9 +37,4 @@
 
 .ng-invalid:required {
     border-left: 5px solid #a94442; /* red */
-}
-
-
-.smallTip {
-    color: red;
 }

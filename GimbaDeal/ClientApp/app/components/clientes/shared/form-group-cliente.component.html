@@ -1,0 +1,31 @@
+﻿<div [formGroup]="grupoCliente" class="panel-body">
+    <div class="row">
+        <input name="id" id="id" type="hidden" />
+        <div class="form-group col-md-6">
+            <label>Nome</label>
+            <input [formControl]="nome" maxlength="200" class="form-control" required />
+
+            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="alert alert-danger">
+                <div *ngIf="nome.errors.required">
+                    Nome do cliente é obrigatório.
+                </div>
+                <div *ngIf="nome.errors.minlength">
+                    Nome do cliente deve ter no mínimo 10 caracteres.
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cnpj">CNPJ <small class="smallTip">(Apenas Números)</small></label>
+            <input [formControl]="cnpj" maxlength="14" class="form-control" required />
+
+            <div *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)" class="alert alert-danger">
+                <div *ngIf="cnpj.errors.required">
+                    CNPJ do cliente é obrigatório.
+                </div>
+                <div *ngIf="cnpj.errors.minlength">
+                    CNPJ do cliente deve ter 14 caracteres.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

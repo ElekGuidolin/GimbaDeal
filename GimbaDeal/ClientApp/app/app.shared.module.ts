@@ -1,27 +1,30 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
-import { AppComponent } from './components/app/app.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { ClienteService } from './core/services/cliente.service';
-import { ListarClientesComponent } from './components/clientes/listar-clientes/listar-clientes.component';
-import { IncluirClienteComponent } from './components/clientes/incluir-cliente/incluir-cliente.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AppComponent } from './components/app/app.component';
+import { IncluirClienteComponent } from './components/clientes/incluir-cliente/incluir-cliente.component';
+import { ListarClientesComponent } from './components/clientes/listar-clientes/listar-clientes.component';
+import { FormGroupClienteComponent } from './components/clientes/shared/form-group-cliente.component';
+import { FormGroupEnderecoComponent } from './components/clientes/shared/form-group-endereco.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { ClienteService } from './core/services/cliente.service';
+import { EnderecoService } from './core/services/endereco.service';
+
 
 @NgModule({
     providers: [
-        ClienteService
+        ClienteService,
+        EnderecoService
     ],
     exports: [
         IncluirClienteComponent
     ],
     imports: [
-        ReactiveFormsModule,
         CommonModule,
         HttpModule,
         FormsModule,
@@ -33,14 +36,17 @@ import { AlertModule } from 'ngx-bootstrap/alert';
             { path: 'listar-clientes', component: ListarClientesComponent },
             { path: 'incluir-cliente', component: IncluirClienteComponent },
             { path: '**', redirectTo: 'home' }
-        ])
+        ]),
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
         NavMenuComponent,
         ListarClientesComponent,
         IncluirClienteComponent,
-        HomeComponent
+        HomeComponent,
+        FormGroupClienteComponent,
+        FormGroupEnderecoComponent
     ]
 })
 export class AppModuleShared {
